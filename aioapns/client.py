@@ -14,6 +14,7 @@ class APNs:
     def __init__(
         self,
         client_cert: Optional[str] = None,
+        client_cert_password: Optional[str] = None,
         key: Optional[str] = None,
         key_id: Optional[str] = None,
         team_id: Optional[str] = None,
@@ -36,6 +37,7 @@ class APNs:
         elif client_cert:
             self.pool = APNsCertConnectionPool(
                 cert_file=client_cert,
+                client_cert_password=client_cert_password,
                 topic=topic,
                 max_connections=max_connections,
                 max_connection_attempts=max_connection_attempts,
