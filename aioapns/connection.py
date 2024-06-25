@@ -433,7 +433,8 @@ class APNsCertConnectionPool(APNsBaseConnectionPool):
     def __init__(
         self,
         cert_file: str,
-        client_cert_password: Optional[str] = None,
+        cert_password: Optional[str] = None,
+        cert_keyfile: Optional[str] = None,
         topic: Optional[str] = None,
         max_connections: int = 10,
         max_connection_attempts: int = 5,
@@ -453,7 +454,7 @@ class APNsCertConnectionPool(APNsBaseConnectionPool):
         if no_cert_validation:
             self.ssl_context.check_hostname = False
             self.ssl_context.verify_mode = ssl.CERT_NONE
-        self.ssl_context.load_cert_chain(cert_file, password=client_cert_password)
+        self.ssl_context.load_cert_chain(cert_file, password=cert_password, keyfile=cert_keyfile)
 
         if not self.apns_topic:
             with open(self.cert_file, "rb") as f:
